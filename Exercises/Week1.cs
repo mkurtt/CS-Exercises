@@ -11,17 +11,13 @@ namespace ConsoleApplication7
         static void Main(string[] args)
         {
             #region ResizingArray
-
-
+                
             string[] ogrenci = new string[0];
-
             bool X = false;
             do
             {
-
                 Console.WriteLine("MENU \n1-Ogrenci Ekle\n2-Listele\n3-ogrenci ara\n4-ogrenci sil\n5-dosya yaz\n6-Cikis\n >>>");
                 int q = Convert.ToInt32(Console.ReadLine());
-
                 switch (q)
                 {
                     case 1:
@@ -29,7 +25,6 @@ namespace ConsoleApplication7
                         string ad = Console.ReadLine();
                         Console.WriteLine("ogrenci soyad giriniz: ");
                         string soyad = Console.ReadLine();
-
 
                         string[] qwe = new string[ogrenci.Length];
                         for (int j = 0; j < ogrenci.Length; j++)
@@ -51,7 +46,6 @@ namespace ConsoleApplication7
                             Console.Write(ogrenci[j] + " " + ogrenci[j] + "\n");
                             File.AppendAllText("d:\\ogrenci.txt", ogrenci[j] + " " + ogrenci[j] + "\n");
                         }
-
                         Console.ReadKey();
                         break;
                     case 3:
@@ -108,9 +102,7 @@ namespace ConsoleApplication7
                                     fdgh[k] = ogrenci[j];
                                 }
                             }
-
                             ogrenci = fdgh;
-
                             Console.WriteLine("silindi.");
                             Console.ReadKey();
                         }
@@ -129,14 +121,11 @@ namespace ConsoleApplication7
                         Console.WriteLine("yanlis giris");
                         break;
                 }
-
-
                 Console.Clear();
 
-
             } while (X == false);
-            #endregion
             
+            #endregion
         }
     }
 }
