@@ -11,7 +11,7 @@ namespace ConsoleApplication7
         static void Main(string[] args)
         {
             #region ResizingArray
-          
+
 
             string[] ogrenci = new string[0];
 
@@ -109,11 +109,8 @@ namespace ConsoleApplication7
                                 }
                             }
 
-                            ogrenci = new string[fdgh.Length + 1];
-                            for (int j = 0; j < fdgh.Length; j++)
-                            {
-                                ogrenci[j] = fdgh[j];
-                            }
+                            ogrenci = fdgh;
+
                             Console.WriteLine("silindi.");
                             Console.ReadKey();
                         }
