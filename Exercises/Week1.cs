@@ -201,7 +201,7 @@ namespace ConsoleApplication7
             #endregion    
                 
             #region matrix arac
-
+            int Butce = 0;
             const byte garajBoyutu = 100;
             byte currentCarIndex = 0;
             string[,] araclar = new string[garajBoyutu, 4];
@@ -241,7 +241,7 @@ namespace ConsoleApplication7
             while (true)
             {
 
-                Console.WriteLine("MENU\n1-Arac Ekle\n2-Kiradan al\n3-Kirala\n4-Cikis");
+                Console.WriteLine($"MENU\n1-Arac Ekle\n2-Kiradan al\n3-Kirala\n4-Cikis\n Bonus: Butce = {Butce}");
                 char c = Console.ReadKey(true).KeyChar;
 
                 switch (c)
@@ -324,8 +324,11 @@ namespace ConsoleApplication7
                             if (Y1[i] == zxc1-1)
                             {
                                 araclar[i, 3] = "true";
+                                Butce += Convert.ToInt32(araclar[i, 2]);
                             }
                         }
+
+                        
 
                         Console.WriteLine("Arac Kiralandi!");
                         break;
@@ -346,7 +349,7 @@ namespace ConsoleApplication7
                 Console.Clear();
             }
 
-            #endregion    
+            #endregion       
         }
     }
 }
