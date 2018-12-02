@@ -199,6 +199,128 @@ namespace ConsoleApplication7
             Console.ReadKey();
 
             #endregion    
+                
+            #region matrix arac
+
+            const byte garajBoyutu = 100;
+            byte currentCarIndex = 0;
+            string[,] araclar = new string[garajBoyutu, 4];
+            // marka model fiyat kira
+            bool X = false;
+
+            araclar[currentCarIndex, 0] = "BMW";
+            araclar[currentCarIndex, 1] = "qwe";
+            araclar[currentCarIndex, 2] = "321";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            araclar[currentCarIndex, 0] = "BMW";
+            araclar[currentCarIndex, 1] = "asd";
+            araclar[currentCarIndex, 2] = "234";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            araclar[currentCarIndex, 0] = "BMW";
+            araclar[currentCarIndex, 1] = "zxc";
+            araclar[currentCarIndex, 2] = "345";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            araclar[currentCarIndex, 0] = "Opel";
+            araclar[currentCarIndex, 1] = "qwe";
+            araclar[currentCarIndex, 2] = "321";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            araclar[currentCarIndex, 0] = "Opel";
+            araclar[currentCarIndex, 1] = "asd";
+            araclar[currentCarIndex, 2] = "345";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            araclar[currentCarIndex, 0] = "Opel";
+            araclar[currentCarIndex, 1] = "zxc";
+            araclar[currentCarIndex, 2] = "234";
+            araclar[currentCarIndex, 3] = "false";
+            currentCarIndex++;
+            while (true)
+            {
+
+                Console.WriteLine("MENU\n1-Arac Ekle\n2-Kiralanmis Ara\n3-Kirala\n4-Cikis");
+                char c = Console.ReadKey(true).KeyChar;
+
+                switch (c)
+                {
+                    case '1':
+                        Console.WriteLine("Arac Markasi: ");
+                        araclar[currentCarIndex, 0] = Console.ReadLine();
+                        Console.WriteLine("Arac Modeli: ");
+                        araclar[currentCarIndex, 1] = Console.ReadLine();
+                        Console.WriteLine("Arac Kira Bedeli: ");
+                        araclar[currentCarIndex, 2] = Console.ReadLine();
+                        araclar[currentCarIndex, 3] = "false";
+
+                        Console.WriteLine("Arac Eklendi!");
+                        currentCarIndex++;
+                        break;
+                    case '2':
+                        for (int i = 0; i < currentCarIndex; i++)
+                        {
+                            if (araclar[i, 3].Equals("true"))
+                            {
+                                Console.WriteLine($"Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
+                            }
+                        }
+                        break;
+                    case '3':
+                        Console.Clear();
+                        Console.WriteLine("KIRALIK ARA\nArama Kelimesi: ");
+                        string arananKelime = Console.ReadLine();
+                        int[] Y = new int[currentCarIndex];
+                        int Z = 0;
+                        bool V = false;
+                        for (int i = 0; i < currentCarIndex; i++)
+                        {
+                            if ((araclar[i, 0].Contains(arananKelime) || araclar[i, 1].Contains(arananKelime)) && araclar[i, 3].Equals("false"))
+                            {
+                                Y[i] = Z;
+                                Console.WriteLine($"{Z+1}. Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
+                                Z++;
+                                V = true;
+                            }
+                            else Y[i] = -1;
+                        }
+                        if (V == false)
+                        {
+                            Console.WriteLine("arac yok!");
+                            break;
+                        }
+                        Console.WriteLine("Kacinci Arac Kiralanacak: ");
+                        int zxc = Convert.ToInt32(Console.ReadLine());
+
+                        for (int i = 0; i < currentCarIndex; i++)
+                        {
+                            if (Y[i] == zxc-1)
+                            {
+                                araclar[i, 3] = "true";
+                            }
+                        }
+
+                        Console.WriteLine("Arac Kiralandi!");
+                        break;
+                    case '4':
+                        X = true;
+                        break;
+                    default:
+                        Console.WriteLine("Yanlis tercih.");
+                        break;
+                }
+
+                if (X == true)
+                {
+                    break;
+                }
+
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+            #endregion    
         }
     }
 }
