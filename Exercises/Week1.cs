@@ -241,7 +241,7 @@ namespace ConsoleApplication7
             while (true)
             {
 
-                Console.WriteLine("MENU\n1-Arac Ekle\n2-Kiralanmis Ara\n3-Kirala\n4-Cikis");
+                Console.WriteLine("MENU\n1-Arac Ekle\n2-Kiradan al\n3-Kirala\n4-Cikis");
                 char c = Console.ReadKey(true).KeyChar;
 
                 switch (c)
@@ -259,27 +259,18 @@ namespace ConsoleApplication7
                         currentCarIndex++;
                         break;
                     case '2':
-                        for (int i = 0; i < currentCarIndex; i++)
-                        {
-                            if (araclar[i, 3].Equals("true"))
-                            {
-                                Console.WriteLine($"Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
-                            }
-                        }
-                        break;
-                    case '3':
                         Console.Clear();
-                        Console.WriteLine("KIRALIK ARA\nArama Kelimesi: ");
+                        Console.Write("KIRALANMIS ARA\nArama Kelimesi: ");
                         string arananKelime = Console.ReadLine();
                         int[] Y = new int[currentCarIndex];
                         int Z = 0;
                         bool V = false;
                         for (int i = 0; i < currentCarIndex; i++)
                         {
-                            if ((araclar[i, 0].Contains(arananKelime) || araclar[i, 1].Contains(arananKelime)) && araclar[i, 3].Equals("false"))
+                            if ((araclar[i, 0].Contains(arananKelime) || araclar[i, 1].Contains(arananKelime)) && araclar[i, 3].Equals("true"))
                             {
                                 Y[i] = Z;
-                                Console.WriteLine($"{Z+1}. Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
+                                Console.WriteLine($"{Z + 1}. Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
                                 Z++;
                                 V = true;
                             }
@@ -290,12 +281,47 @@ namespace ConsoleApplication7
                             Console.WriteLine("arac yok!");
                             break;
                         }
-                        Console.WriteLine("Kacinci Arac Kiralanacak: ");
+                        Console.WriteLine("Kacinci Arac Alinacak: ");
                         int zxc = Convert.ToInt32(Console.ReadLine());
 
                         for (int i = 0; i < currentCarIndex; i++)
                         {
-                            if (Y[i] == zxc-1)
+                            if (Y[i] == zxc - 1)
+                            {
+                                araclar[i, 3] = "false";
+                            }
+                        }
+                        Console.WriteLine("Arac Alindi!");
+                        break;
+                    case '3':
+                        Console.Clear();
+                        Console.Write("KIRALANACAK ARA\nArama Kelimesi: ");
+                        string arananKelime1 = Console.ReadLine();
+                        int[] Y1 = new int[currentCarIndex];
+                        int Z1 = 0;
+                        bool V1 = false;
+                        for (int i = 0; i < currentCarIndex; i++)
+                        {
+                            if ((araclar[i, 0].Contains(arananKelime1) || araclar[i, 1].Contains(arananKelime1)) && araclar[i, 3].Equals("false"))
+                            {
+                                Y1[i] = Z1;
+                                Console.WriteLine($"{Z1+1}. Marka: {araclar[i, 0]}, Model: {araclar[i, 1]}, Kira Fiyati: {araclar[i, 2]}");
+                                Z1++;
+                                V1 = true;
+                            }
+                            else Y1[i] = -1;
+                        }
+                        if (V1 == false)
+                        {
+                            Console.WriteLine("arac yok!");
+                            break;
+                        }
+                        Console.WriteLine("Kacinci Arac Kiralanacak: ");
+                        int zxc1 = Convert.ToInt32(Console.ReadLine());
+
+                        for (int i = 0; i < currentCarIndex; i++)
+                        {
+                            if (Y1[i] == zxc1-1)
                             {
                                 araclar[i, 3] = "true";
                             }
