@@ -126,6 +126,79 @@ namespace ConsoleApplication7
             } while (X == false);
             
             #endregion
+                
+            #region matrix
+
+            Console.Write("kac kolon oynanacak(1-12): ");
+            byte kolon = Convert.ToByte(Console.ReadLine());
+
+            byte[,] loto = new byte[kolon, 6];
+
+            byte[] sonuclar = new byte[6];
+
+            Random rnd = new Random();
+            for (int i = 0; i < 6; i++)
+            {
+                byte qwe = Convert.ToByte(rnd.Next(1, 49));
+                if (sonuclar[i] < 50 || sonuclar[i] > 0)
+                    sonuclar[i] = qwe;
+            }
+
+            Array.Sort(sonuclar);
+
+            for (int i = 0; i < kolon; i++)
+            {
+                Console.Write((i + 1) + ". kolon icin 6 deger gir (\" \" kullanarak)(1-49): ");
+                string degerlerrrrr = Console.ReadLine();
+                string[] degeler = degerlerrrrr.Split(' ');
+                byte[] temp = new byte[6];
+                for (int j = 0; j < 6; j++)
+                {
+                    temp[j] = Convert.ToByte(degeler[j]);
+                    if (loto[i, j] > 50 || loto[i, j] < 0)
+                    {
+                        i--;
+                        Console.WriteLine("gecersiz deger girildi.");
+                    }
+                }
+                Array.Sort(temp);
+                for (int j = 0; j < 6; j++)
+                {
+                    loto[i, j] = temp[j];
+                }
+            }
+
+            bool[] asd = new bool[kolon];
+
+            for (int i = 0; i < kolon; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    if (sonuclar[j] != loto[i, j])
+                    {
+                        asd[i] = true;
+                        break;
+                    }
+                }
+            }
+            Console.Write("kazanan degerler: ");
+            for (int j = 0; j < 6; j++)
+            {
+                Console.Write(sonuclar[j] + " ");
+            }
+            Console.WriteLine(" ");
+            for (int i = 0; i < kolon; i++)
+            {
+                if (asd[i] == false)
+                {
+                    Console.WriteLine((i + 1) + ". kolon TUTTU.");
+                }else Console.WriteLine((i + 1) + ". kolon tutmadi.");
+
+            }
+
+            Console.ReadKey();
+
+            #endregion    
         }
     }
 }
