@@ -9,7 +9,7 @@ namespace ConsoleApp1
         // bu yuzden komut vererek yapmayi amacladim.
         // her ornegin kendine gore "help" secenegi bulunuyor.
         // direk calistirip sorun yasamadan kullanilabilir durumda
-        
+
         #region Resizing Array Example
         static string[] AddOgrenci(string[] ogrenci, string ad, string soyad)
         {
@@ -115,15 +115,15 @@ namespace ConsoleApp1
             string[] ogrenci = new string[0];
             bool X = false;
             Console.WriteLine("!! OGRENCI ORNEK !!");
-            if (c==1) Console.WriteLine("Komutlar icin \"help-exr\" yaziniz.");
-            
+            if (c == 1) Console.WriteLine("Komutlar icin \"help-exr\" yaziniz.");
+
             do
             {
                 string[] parameters;
                 string q = "";
                 if (c == 1)
                 {
-                   
+
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("@" + Kullanici + " >>");
                     Console.ResetColor();
@@ -131,12 +131,12 @@ namespace ConsoleApp1
                     parameters = komut.Split(' ');
                     q = parameters[0];
                 }
-                else    
+                else
                 {
                     Console.WriteLine("MENU \n1-Ogrenci Ekle\n2-Listele\n3-ogrenci ara\n4-ogrenci sil\n5-Cikis");
                     Console.Write(">>");
                     q = Console.ReadLine();
-                    parameters = new string[3]; 
+                    parameters = new string[3];
                 }
 
                 switch (q)
@@ -249,7 +249,7 @@ namespace ConsoleApp1
 
         #endregion
 
-        #region matrix arac
+        #region galeri
 
         static void matrixArac() //Hazir elimde bulunan kodu degistirmekle ugrasmak istemedim. bu yuzden komut secenegi yok.
         {
@@ -400,20 +400,183 @@ namespace ConsoleApp1
                 Console.ReadKey();
             }
         }
+
         #endregion
 
         #region macSkor
 
+        private static void HelpMac()
+        {
+            Console.WriteLine("!!Help-MacScore!!");
+            Console.WriteLine("\"mac\" \tyeni mac ekler ex. \"mac [takim1] [takim2]\"");
+            Console.WriteLine("\"listele\" \tOgrencileri listeler");
+            Console.WriteLine("\"help-mac\" \tBu mesaji hosterir");
+            Console.WriteLine("\"exit\" \tCikis");
+        }
 
+        static void macSkor()
+        {
+            string[,] Maclar = new string[10, 4];
+            int MacIndex = 0;
+            Console.WriteLine("\"help-mac\" yazarak baslayiniz.");
+
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("@" + Kullanici + " >>");
+                Console.ResetColor();
+                string strKomut = Console.ReadLine();
+                string[] Parameters = strKomut.Split(' ');
+                switch (Parameters[0])
+                {
+                    case "mac":
+                        if (Parameters.Length != 3)
+                        {
+                            Console.WriteLine("Eksik yada fazla parametre girildi. \"help-mac\" yazarak dogru formati gorebilirsiniz.");
+                        }
+                        else
+                        {
+                            Random rnd = new Random();
+                            Maclar[MacIndex, 0] = Parameters[1];
+                            Maclar[MacIndex, 1] = Convert.ToString(rnd.Next(7));
+                            Maclar[MacIndex, 2] = Convert.ToString(rnd.Next(7));
+                            Maclar[MacIndex, 3] = Parameters[3];
+
+                            Console.WriteLine($"{Maclar[MacIndex, 0]}: {Maclar[MacIndex, 1]} - {Maclar[MacIndex, 2]} :{Maclar[MacIndex, 3]}");
+                            MacIndex++;
+                        }
+                        break;
+                    case "listele":
+                        for (int i = 0; i < Maclar.GetLength(0); i++)
+                        {
+                            Console.WriteLine($"{Maclar[i, 0]}: {Maclar[i, 1]} - {Maclar[i, 2]} :{Maclar[i, 3]}");
+                        }
+                        break;
+                    case "exit":
+                        return;
+                    default:
+                        break;
+                }
+            }
+
+        }
 
         #endregion
 
-        #region Galeri
+        #region jungle
 
+        static bool Key = false;
+        static bool Kol = false;
+        static Random rnd = new Random();
+        static int A = rnd.Next(3);
+        static int OdaNo;
 
+        static void BirinciOda()
+        {
+            OdaNo = 1;
+            Console.WriteLine("Uyandigin odaya geri dondun. Etrafta hic bir sey olmadigni biliyorsun. \nHangi kapiya yoneleceksin? (sol-sag)");
+        }
+
+        static void SolOda()
+        {
+            OdaNo = 2;
+            if (Key == false)
+            {
+                Console.WriteLine("Kapiyi acmaaya calistiginda kilitli oldugunu farkettigin kapi bir mekanizmayi tetikledi ve oldun.");
+                Gameover();
+            }
+            else
+            {
+                Kol = true;
+                Console.WriteLine("Guvenli bir sekilde iceri girmeyi basardin. Odaya baktin, bir kol gordun. dier odadaki agir ve metal kapiyi acmak icin olabilecegini dusunerek kolu indiriyorsun. Odada yapacak baska hic bir sey yok. \nGeri donmek icin \"geri\" yaziniz.");
+            }
+        }
+
+        static void SagOda()
+        {
+            OdaNo = 3;
+            if (Kol == false)
+            {
+                Key = true;
+                Console.WriteLine("Odaya girdin. Karsinda Demir bir kapi duruyor. Uzerinde ufak bir anahtar deligi disinda hic bir sey yok. Odayi aramaya basliyorsun, ve bir anahtar buluyorsun.\nNe Yapacaksin? (geri-kapiyi dene)");
+            }
+            else
+            {
+                Console.WriteLine("Odaya girdin. ve dier odada indirdigin kolun kapiyi actigini gordun. ");
+                Disarisi();
+            }
+        }
+
+        static void Disarisi()
+        {
+            if (A == 1)
+            {
+                Console.WriteLine("Disariyi gorunce heycanla kosarak ciktin. Binanin disarisindaki silahli insanlarin dikkatini cektin, seni silahla vurarak oldurduler.");
+                Gameover();
+            }
+            else
+            {
+                Console.WriteLine("Supheli bir sekilde yavasca disari ciktin ve silahli askerleri gordun. onlarin dikkatini cekmemek icin yavas bir sekilde uzaklasarak kurtuldun. \n Oyunu kazandin.\nBaskatan baslamak icin \"restart\", cikmak icin \"exit\"");
+            }
+        }
+
+        static void kapi()
+        {
+            Console.WriteLine("Anahtari kapiya soktugun anda yuksek woltajli bir elektrik shocku yedin ve orada o anda oldun.");
+            Gameover();
+        }
+
+        static void Gameover()
+        {
+            Console.WriteLine("OYUN BITTI!");
+            Console.WriteLine("Yeniden baslamak icin \"restart\" yaz.");
+            Console.WriteLine("Cikmak icin \"exit\" yaz.");
+        }
+        
+        static void Jungle()
+        {
+            OdaNo = 1;
+            Console.WriteLine("Example Jungle Game!");
+            Console.WriteLine("\t\t\t Bu oyunda buglarla karsilasmak mumkun. ayni odaya tekrar girip ciktikca olan olaylarin tekrar etmesi gibi. Detayli ugrasmak icin fazla vakit bulamadim.");
+
+            Console.WriteLine("Karanlik bir odada uyandin. Etrafina bakiyorsun, butun oda bombos. farkli yerlere acildigini dusundugum yan yana 2 kapi var. Kapilardan birisine giderek cikis yolu aramaya karar verdin karar verdin. \nHangi Kapidan gececeksin? (sol-sag)");
+
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("@" + Kullanici + " >>");
+                Console.ResetColor();
+                string c = Console.ReadLine();
+                switch (c)
+                {
+                    case "kapiyi dene":
+                        if(OdaNo == 3)
+                            kapi();
+                        break;
+                    case "geri":
+                        if (OdaNo != 1)
+                            BirinciOda();
+                        break;
+                    case "sol":
+                        if (OdaNo == 1)
+                            SolOda();
+                        break;
+                    case "sag":
+                        if (OdaNo == 1)
+                            SagOda();
+                        break;
+                    case "restart":
+                        Jungle();
+                        break;
+                    case "exit":
+                        return;
+                    default:
+                        break;
+                }
+            }
+        }
 
         #endregion
-
 
         #region Menu
 
@@ -477,11 +640,11 @@ namespace ConsoleApp1
                         return;
                     default:
                         if (Kullanici == "") { Console.WriteLine("Orneklere erisebilmek icin giris yapiniz."); }
-                        
+
                         break;
                 }
 
-                if (Kullanici == "") {  }
+                if (Kullanici == "") { }
                 else
                 {
                     switch (Parameters[0])
@@ -509,12 +672,10 @@ namespace ConsoleApp1
                             matrixArac();
                             break;
                         case "jungle":
-
-
+                            Jungle();
                             break;
                         case "macskor":
-
-
+                            macSkor();
                             break;
                         default:
                             break;
@@ -522,6 +683,7 @@ namespace ConsoleApp1
                 }
             }
         }
+
         #endregion
     }
 }
