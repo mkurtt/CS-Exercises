@@ -4,12 +4,7 @@ namespace ConsoleApp1
 {
     class Program
     {
-        // olabildigince hatali girisleri kontrol ettim
-        // gunlerdir linuxta calistigim icin terminal e alistigimdan 1-2-3 diye secmek hem yavas hem ugrastirici geliyor
-        // bu yuzden komut vererek yapmayi amacladim.
-        // her ornegin kendine gore "help" secenegi bulunuyor.
-        // direk calistirip sorun yasamadan kullanilabilir durumda
-
+        #region Functions
         #region Resizing Array Example
         static string[] AddOgrenci(string[] ogrenci, string ad, string soyad)
         {
@@ -246,6 +241,31 @@ namespace ConsoleApp1
 
 
 
+
+        #endregion
+
+        #region Faktorial
+
+        private static int facq(int v)
+        {
+            int a = 1;
+            for (int i = 1; i <= v; i++)
+            {
+                a *= i;
+            }
+            return a;
+        }
+
+        //overload
+        private static decimal facq(decimal v)
+        {
+            int a = 1;
+            for (int i = 1; i <= v; i++)
+            {
+                a *= i;
+            }
+            return a;
+        }
 
         #endregion
 
@@ -532,7 +552,7 @@ namespace ConsoleApp1
             Console.WriteLine("Yeniden baslamak icin \"restart\" yaz.");
             Console.WriteLine("Cikmak icin \"exit\" yaz.");
         }
-        
+
         static void Jungle()
         {
             OdaNo = 1;
@@ -550,7 +570,7 @@ namespace ConsoleApp1
                 switch (c)
                 {
                     case "kapiyi dene":
-                        if(OdaNo == 3)
+                        if (OdaNo == 3)
                             kapi();
                         break;
                     case "geri":
@@ -577,6 +597,119 @@ namespace ConsoleApp1
         }
 
         #endregion
+        
+        #endregion
+        
+        #region recursive Example
+        static void RecursiveMethod()
+        {
+            Console.WriteLine("asd");
+            RecursiveMethod();
+        }
+        #endregion
+
+        #region kullanimlar
+
+        static void SideMain(/*string[] args*/)
+        {
+            //params
+            MenuOlustur("Menu","Ekle", "sil", "guncelle", "cikis");
+            
+            //hata yakalama
+            string secim = Console.ReadLine();
+            int s = 0;
+
+            bool sonuc = int.TryParse(secim, out s);
+
+            //bool sonuc = donusturmeyiDene(secim, ref s);
+
+            if (sonuc)
+            {
+                switch (s)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        Console.WriteLine("Yanlis secim yapildi");
+                        break;
+                }
+            }
+
+
+            ////out ve ref
+            //int s = 10;
+            //int yeniDeger = SayiEkleREF(ref s);
+
+            //int s1;
+            //int yeniDeger1 = SayiEkleOUT(out s1);
+            //Console.WriteLine(s);
+            //Console.WriteLine(yeniDeger);
+
+            Console.ReadKey();
+        }
+
+        #region params
+
+        // params hep en sagda
+        static void MenuOlustur(string MenuBaslik,params string[] dizi)
+        {
+            Console.WriteLine(MenuBaslik);
+            for (int i = 0; i < dizi.Length; i++)
+            {
+                Console.WriteLine($"{i+1}-{dizi[i]}");
+            }
+        }
+        #endregion
+
+        #region out & ref
+
+        //out ve ref parametre kullanimi
+        //ref > sayi yi  s nin degerinden  s ninn rreferansi haline getirir. ref te tanimlandigi yerde ilk deger atamasi yapilmak zorundadir.
+        //out > sayi yi  s nin degerinden  s ninn rreferansi haline getirir. ref te tanimlandigi yerde ilk deger atamasi fonksion icinde yapilabilir.
+        static int SayiEkleREF(ref int sayi)
+        {
+            int sonuc = sayi += 5;
+
+            return sonuc += 20;
+        }
+        static int SayiEkleOUT(out int sayi)
+        {
+            sayi = 10;
+            int sonuc = sayi += 5;
+
+            return sonuc += 20;
+        }
+        #endregion
+
+        #region hata
+
+        //Int.TryParse in icerigi
+        static bool donusturmeyiDene(string deger,ref int s)
+        {
+            bool result = true;
+            try
+            {
+                s = Convert.ToInt32(deger);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                result = false;
+            }
+            return result;
+        }
+
+
+
+        #endregion
+
+        #endregion
 
         #region Menu
 
@@ -601,17 +734,20 @@ namespace ConsoleApp1
             Console.WriteLine("\"clear\" \tEkrani temizler");
             Console.WriteLine("\"help\" \t\tBu mesaji gosterir");
             Console.WriteLine("\"exit\" \t\tCikis");
-            Console.WriteLine("Ornekler!!");
+            Console.WriteLine("\nOrnekler!!");
             Console.WriteLine("\"exResize\" \tDinamik boyutlu dizi ornegine gecis");
             Console.WriteLine("\"galeri\" \tMatrix ile galeri otomat ornegine gecis.");
             Console.WriteLine("\"jungle\" \tJungle oyun ornegine gecis");
             Console.WriteLine("\"macskor\" \tMac Skor ornegine gecis");
-            Console.WriteLine("\"fibo\" \tGirilen deger kadar fibonacci dizi degerini yazar. ex. fibo 10 ");
+            Console.WriteLine("\"fibo\" \t\tGirilen deger kadar fibonacci dizi degerini yazar. ex. fibo 10 ");
+            Console.WriteLine("\"facq\" \t\tGirilen degerin faktoriyelini alir ex. facq 5");
         }
 
         static void Main(string[] args)
         {
             Console.WriteLine("\"help\" yazarak baslayiniz.");
+            
+
 
             while (true)
             {
@@ -638,6 +774,9 @@ namespace ConsoleApp1
                         break;
                     case "exit":
                         return;
+                    case "sidemain":
+                        SideMain();
+                        break;
                     default:
                         if (Kullanici == "") { Console.WriteLine("Orneklere erisebilmek icin giris yapiniz."); }
 
@@ -677,6 +816,10 @@ namespace ConsoleApp1
                         case "macskor":
                             macSkor();
                             break;
+                        case "facq":
+                            int a = facq(Convert.ToInt32(Parameters[1]));
+                            Console.WriteLine(a);
+                            break;
                         default:
                             break;
                     }
@@ -685,5 +828,6 @@ namespace ConsoleApp1
         }
 
         #endregion
+    }
     }
 }
