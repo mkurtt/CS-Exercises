@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace ConsoleApplication11
 {
     class Program
     {
@@ -597,52 +601,47 @@ namespace ConsoleApp1
         }
 
         #endregion
-        
-        #endregion
-        
-        #region recursive Example
-        static void RecursiveMethod()
-        {
-            Console.WriteLine("asd");
-            RecursiveMethod();
-        }
+
         #endregion
 
         #region kullanimlar
 
         static void SideMain(/*string[] args*/)
         {
-            //params
-            MenuOlustur("Menu","Ekle", "sil", "guncelle", "cikis");
-            
-            //hata yakalama
-            string secim = Console.ReadLine();
-            int s = 0;
 
-            bool sonuc = int.TryParse(secim, out s);
+            #region rest
+                        ////PARAMS
 
-            //bool sonuc = donusturmeyiDene(secim, ref s);
+            //MenuOlustur("Menu", "Ekle", "sil", "guncelle", "cikis");
 
-            if (sonuc)
-            {
-                switch (s)
-                {
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        return;
-                    default:
-                        Console.WriteLine("Yanlis secim yapildi");
-                        break;
-                }
-            }
+                        ////HATA YAKALAMA
+
+            //string secim = Console.ReadLine();
+            //int s = 0;
+
+            //bool sonuc = int.TryParse(secim, out s);
+
+            ////bool sonuc = donusturmeyiDene(secim, ref s);
 
 
-            ////out ve ref
+            ////if (sonuc)
+            //{
+            //    switch (s)
+            //    {
+            //        case 1:
+            //            break;
+            //        case 2:
+            //            break;
+            //        case 3:
+            //            break;
+            //        case 4:
+            //            return;
+            //        default:
+            //            Console.WriteLine("Yanlis secim yapildi");
+            //            break;
+            //    }
+
+                        ////OUT & REF
             //int s = 10;
             //int yeniDeger = SayiEkleREF(ref s);
 
@@ -651,18 +650,58 @@ namespace ConsoleApp1
             //Console.WriteLine(s);
             //Console.WriteLine(yeniDeger);
 
-            Console.ReadKey();
+                        ////RECURSIVE
+            //RecursiveMethod(0);
+
+             ////DEFAULT PARAMETER
+            //bool a = Palindrom(); // cumle = Vektorel
+            //a = Palindrom("Ankara"); // cumle = Ankara
+
+            #endregion
+
         }
+        
+
+        #region default param
+        //Default parametre tanimlama
+        static bool Palindrom(string cumle = "Vektorel")
+        {
+            int count = 0;
+            for (int i = 0; i < cumle.Length; i++)
+            {
+                if (cumle[i] == cumle[cumle.Length-i-1])
+                {
+                    count++;
+                }
+            }
+            return count == cumle.Length;
+        }
+
+        #endregion
+
+        #region recursive Example
+        static void RecursiveMethod(int a)
+        {
+            if (a < 10)
+            {
+                a++;
+                Console.WriteLine("recursive method");
+                RecursiveMethod(a);
+                Console.WriteLine("recursive method cikis");
+            }
+        }
+
+        #endregion
 
         #region params
 
         // params hep en sagda
-        static void MenuOlustur(string MenuBaslik,params string[] dizi)
+        static void MenuOlustur(string MenuBaslik, params string[] dizi)
         {
             Console.WriteLine(MenuBaslik);
             for (int i = 0; i < dizi.Length; i++)
             {
-                Console.WriteLine($"{i+1}-{dizi[i]}");
+                Console.WriteLine($"{i + 1}-{dizi[i]}");
             }
         }
         #endregion
@@ -690,7 +729,7 @@ namespace ConsoleApp1
         #region hata
 
         //Int.TryParse in icerigi
-        static bool donusturmeyiDene(string deger,ref int s)
+        static bool donusturmeyiDene(string deger, ref int s)
         {
             bool result = true;
             try
@@ -746,7 +785,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.WriteLine("\"help\" yazarak baslayiniz.");
-            
+
 
 
             while (true)
@@ -774,7 +813,7 @@ namespace ConsoleApp1
                         break;
                     case "exit":
                         return;
-                    case "sidemain":
+                    case "main":
                         SideMain();
                         break;
                     default:
@@ -828,6 +867,5 @@ namespace ConsoleApp1
         }
 
         #endregion
-    }
     }
 }
