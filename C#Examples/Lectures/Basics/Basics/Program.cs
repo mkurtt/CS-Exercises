@@ -9,7 +9,7 @@ namespace ConsoleApplication11
     class Program
     {
         #region Functions
-        #region Resizing Array Example
+        #region Resizing Array
         static string[] AddOgrenci(string[] ogrenci, string ad, string soyad)
         {
 
