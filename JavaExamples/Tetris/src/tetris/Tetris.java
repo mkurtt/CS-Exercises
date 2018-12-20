@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// Tetris Ornek
 package tetris;
 
 import java.awt.BorderLayout;
