@@ -105,12 +105,16 @@ public class Tetris extends JPanel {
 	public void newPiece() {
 		pieceOrigin = new Point(5, 2); // center top coordinates
 		rotation = 0;
-		if (nextPieces.isEmpty()) {
+		if (nextPieces.isEmpty()) {  	// 
 			Collections.addAll(nextPieces, 0, 1, 2, 3, 4, 5, 6);
 			Collections.shuffle(nextPieces);
 		}
 		currentPiece = nextPieces.get(0);
 		nextPieces.remove(0);
+	}
+	
+	public void paintNextPiece(){
+		
 	}
 	
 	// Collision test for the dropping piece
