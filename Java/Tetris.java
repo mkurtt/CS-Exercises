@@ -13,6 +13,8 @@ public class Tetris extends JPanel {
 
 	private static final long serialVersionUID = -8715353373678321308L;
 
+	
+	//        [pieces] [rotations] [coordinates]
 	private final Point[][][] Tetraminos = {
 			// I-Piece
 			{
@@ -71,13 +73,14 @@ public class Tetris extends JPanel {
 			}
 	};
 	
+	// tetramino colors
 	private final Color[] tetraminoColors = {
 		Color.cyan, Color.blue, Color.orange, Color.yellow, Color.green, Color.pink, Color.red
 	};
 	
 	private Point pieceOrigin;
-	private int currentPiece;
-	private int rotation;
+	private int currentPiece; // current piece index
+	private int rotation; // rotation index
 	private ArrayList<Integer> nextPieces = new ArrayList<Integer>();
 
 	private long score;
@@ -85,12 +88,12 @@ public class Tetris extends JPanel {
 	
 	// Creates a border around the well and initializes the dropping piece
 	private void init() {
-		well = new Color[12][24];
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < 23; j++) {
-				if (i == 0 || i == 11 || j == 22) {
-					well[i][j] = Color.GRAY;
-				} else {
+		well = new Color[12][24]; //play area size 
+		for (int i = 0; i < 12; i++) { // columns
+			for (int j = 0; j < 23; j++) { //rows 
+				if (i == 0 || i == 11 || j == 22) {  // left || right || bottom 
+					well[i][j] = Color.GRAY;	// gr
+				} else {			// rest is black
 					well[i][j] = Color.BLACK;
 				}
 			}
@@ -100,7 +103,7 @@ public class Tetris extends JPanel {
 	
 	// Put a new, random piece into the dropping position
 	public void newPiece() {
-		pieceOrigin = new Point(5, 2);
+		pieceOrigin = new Point(5, 2); // center top coordinates
 		rotation = 0;
 		if (nextPieces.isEmpty()) {
 			Collections.addAll(nextPieces, 0, 1, 2, 3, 4, 5, 6);
