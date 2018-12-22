@@ -1,3 +1,5 @@
+package tetris;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -5,11 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Tetris extends JPanel {
+public class tetris extends JPanel {
 
 	private static final long serialVersionUID = -8715353373678321308L;
 
@@ -88,11 +91,11 @@ public class Tetris extends JPanel {
 	
 	// Creates a border around the well and initializes the dropping piece
 	private void init() {
-		well = new Color[12][24]; //play area size 
+		well = new Color[18][24]; //play area size 
 		for (int i = 0; i < 12; i++) { // columns
 			for (int j = 0; j < 23; j++) { //rows 
 				if (i == 0 || i == 11 || j == 22) {  // left || right || bottom 
-					well[i][j] = Color.GRAY;	// gr
+					well[i][j] = Color.GRAY;	// gray
 				} else {			// rest is black
 					well[i][j] = Color.BLACK;
 				}
@@ -105,16 +108,16 @@ public class Tetris extends JPanel {
 	public void newPiece() {
 		pieceOrigin = new Point(5, 2); // center top coordinates
 		rotation = 0;
+		Random rnd = new Random();
+		
 		if (nextPieces.isEmpty()) {  	// 
-			Collections.addAll(nextPieces, 0, 1, 2, 3, 4, 5, 6);
+			Collections.addAll(nextPieces, rnd.nextInt(7), rnd.nextInt(7), rnd.nextInt(7));
 			Collections.shuffle(nextPieces);
 		}
+		
 		currentPiece = nextPieces.get(0);
 		nextPieces.remove(0);
-	}
-	
-	public void paintNextPiece(){
-		
+		nextPieces.add(rnd.nextInt(7));
 	}
 	
 	// Collision test for the dropping piece
@@ -226,29 +229,41 @@ public class Tetris extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		// Paint the well
-		g.fillRect(0, 0, 26*12, 26*23);
+		g.fillRect(0, 0, 50*12, 26*23);
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 23; j++) {
 				g.setColor(well[i][j]);
-				g.fillRect(26*i, 26*j, 25, 25);
+				g.fillRect(26*i, 26*j, 30, 25);
 			}
 		}
 		
 		// Display the score
 		g.setColor(Color.WHITE);
-		g.drawString("" + score, 19*12, 25);
+		g.drawString("Score: " + score, 30*12, 25);
 		
 		// Draw the currently falling piece
 		drawPiece(g);
+		
+		// Display next piece
+		drawNextPiece(g);
+	}
+	
+	private void drawNextPiece(Graphics g) {		
+		g.setColor(tetraminoColors[nextPieces.get(0)]);
+		for (Point p : Tetraminos[nextPieces.get(0)][0]) {
+			g.fillRect((p.x + 13) * 26, 
+					   (p.y + 4) * 26, 
+					   25, 25);
+		}
 	}
 
 	public static void main(String[] args) {
 		JFrame f = new JFrame("Tetris");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(12*26+10, 26*23+25);
+		f.setSize(18*26+10, 26*23+25);
 		f.setVisible(true);
 		
-		final Tetris game = new Tetris();
+		final tetris game = new tetris();
 		game.init();
 		f.add(game);
 		
