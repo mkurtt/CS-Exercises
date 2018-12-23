@@ -1,1 +1,1 @@
-# Exercises-and-HWs
+# Exercises from the Course Vektorel
