@@ -786,7 +786,7 @@ namespace ConsoleApplication11
         {
             Console.WriteLine("\"help\" yazarak baslayiniz.");
 
-
+            //string ad = "ali" == "a" ? "Ali degeri a(true)" : "Ali degeri a degil(false)";
 
             while (true)
             {
