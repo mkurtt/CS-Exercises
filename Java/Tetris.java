@@ -100,7 +100,7 @@ public class tetris extends JPanel {
 	// Creates a border around the well and initializes the dropping piece
 	private void init() {
 		well = new Color[18][24]; //play area size 
-		for (int i = 0; i < 12; i++) { // columns
+		for (int i = 0; i < 18; i++) { // columns
 			for (int j = 0; j < 23; j++) { //rows 
 				if (i == 0 || i == 11 || j == 22) {  // left || right || bottom 
 					well[i][j] = Color.GRAY;	// gray
@@ -220,10 +220,10 @@ public class tetris extends JPanel {
 			score += 300;
 			break;
 		case 3:
-			score += 500;
+			score += 600;
 			break;
 		case 4:
-			score += 800;
+			score += 1000;
 			break;
 		}
 	}
@@ -246,7 +246,7 @@ public class tetris extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 23; j++) {
 				g.setColor(well[i][j]);
-				             g.fillRect(26*i, 26*j, 30, 25);
+				g.fillRect(26*i, 26*j, 50, 25);
 			}
 		}
 		if(GameOver){
@@ -351,7 +351,6 @@ public class tetris extends JPanel {
 					break;
 				case KeyEvent.VK_SPACE:
 					game.dropDown();
-					game.score += 1;
 					break;
 				} 
 			}
