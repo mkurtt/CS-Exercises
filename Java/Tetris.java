@@ -1,10 +1,15 @@
 package tetris;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -85,6 +90,9 @@ public class tetris extends JPanel {
 	private int currentPiece; // current piece index
 	private int rotation; // rotation index
 	private ArrayList<Integer> nextPieces = new ArrayList<Integer>();
+	
+	static private boolean GameOver = false;
+	
 
 	private long score;
 	private Color[][] well;
@@ -108,6 +116,11 @@ public class tetris extends JPanel {
 	public void newPiece() {
 		pieceOrigin = new Point(5, 2); // center top coordinates
 		rotation = 0;
+		if(collidesAt(5,2,0)){
+			GameOver = true;
+			return;
+		}
+			
 		Random rnd = new Random();
 		
 		if (nextPieces.isEmpty()) {  	// 
@@ -233,28 +246,78 @@ public class tetris extends JPanel {
 		for (int i = 0; i < 12; i++) {
 			for (int j = 0; j < 23; j++) {
 				g.setColor(well[i][j]);
-				g.fillRect(26*i, 26*j, 30, 25);
+				             g.fillRect(26*i, 26*j, 30, 25);
 			}
 		}
-		
-		// Display the score
-		g.setColor(Color.WHITE);
-		g.drawString("Score: " + score, 30*12, 25);
-		
-		// Draw the currently falling piece
-		drawPiece(g);
-		
-		// Display next piece
-		drawNextPiece(g);
+		if(GameOver){
+			GameOver(g);
+		}
+		else{
+			
+			// Display scores
+			try {
+				Scores(g);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			// Draw the currently falling piece
+			drawPiece(g);
+			
+			// Display next piece
+			drawNextPiece(g);
+			
+		}
 	}
 	
 	private void drawNextPiece(Graphics g) {		
 		g.setColor(tetraminoColors[nextPieces.get(0)]);
 		for (Point p : Tetraminos[nextPieces.get(0)][0]) {
-			g.fillRect((p.x + 13) * 26, 
+			g.fillRect((p.x + 14) * 26, 
 					   (p.y + 4) * 26, 
-					   25, 25);
+					   25,        25);
 		}
+	}
+	
+	private void GameOver(Graphics g){
+		g.setFont(new Font("Arial", Font.BOLD, 30));
+		g.setColor(Color.WHITE);
+		g.drawString("GAME OVER!",130, 290);
+	}
+	
+	private void Scores(Graphics g) throws IOException{
+		// High Scores
+		g.setFont(new Font("Arial", Font.BOLD, 15));
+		g.setColor(Color.RED);
+		g.drawString("--High Scores--", 340, 400);
+		
+		File file = new File("HighScores.txt");
+		if(!file.exists()){
+			file.createNewFile();
+		}
+		BufferedReader bfr = new BufferedReader(new FileReader(file));
+		String scoreLine = "";
+		
+		int ScoresX = 415;
+		int i = 0;
+		
+		while((scoreLine = bfr.readLine()) != null){
+			String[] data = scoreLine.split(" ");
+			g.setFont(new Font("Arial",Font.PLAIN,12));
+			g.setColor(Color.WHITE);
+			g.drawString(data[0], 350 , ScoresX+= 15);
+			g.drawString(data[1], 415 , ScoresX);
+			
+			if(i == 4) break;
+		}
+		bfr.close();
+		
+		// Current Score
+		g.setFont(new Font("Arial", Font.BOLD, 15));
+		g.setColor(Color.WHITE);
+		g.drawString("Score: " + score, 30*12, 25);
 	}
 
 	public static void main(String[] args) {
@@ -302,8 +365,11 @@ public class tetris extends JPanel {
 			@Override public void run() {
 				while (true) {
 					try {
-						Thread.sleep(1000);
-						game.dropDown();
+						Thread.sleep(500);
+						if(GameOver){
+							
+						}else
+							game.dropDown();
 					} catch ( InterruptedException e ) {}
 				}
 			}
