@@ -1,0 +1,11 @@
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\bin\Debug\netcoreapp2.1\SanalBebek.deps.json
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\bin\Debug\netcoreapp2.1\SanalBebek.runtimeconfig.json
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\bin\Debug\netcoreapp2.1\SanalBebek.runtimeconfig.dev.json
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\bin\Debug\netcoreapp2.1\SanalBebek.dll
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\bin\Debug\netcoreapp2.1\SanalBebek.pdb
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.csprojAssemblyReference.cache
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.csproj.CoreCompileInputs.cache
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.AssemblyInfoInputs.cache
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.AssemblyInfo.cs
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.dll
+C:\Users\pc\source\repos\SanalBebek\SanalBebek\obj\Debug\netcoreapp2.1\SanalBebek.pdb
