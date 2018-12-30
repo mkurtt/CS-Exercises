@@ -40,7 +40,7 @@ namespace SanalBebek
             public Events currentEvent { get; set; }
             public string petMessage { get; set; }
             public bool isDead { get; set; }
-            public int eventTimer { get; set; }
+            public int eventTimer { get; set; 
 
 
             private double health;
@@ -190,7 +190,7 @@ namespace SanalBebek
                 }
                 if (this.Health == 0)
                 {
-
+                    this.isDead = true;
                 }
             }
 
@@ -246,35 +246,40 @@ namespace SanalBebek
 
             public void UpdateMessage()
             {
-                if (currentEvent == Events.Idle)
-                {
-                    if (this.Stress < 50)
-                        this.petMessage = "Pufff";
-                    else if (this.Energy < 50)
-                        this.petMessage = "*Yawns*";
-                    else if (this.Hygiene < 50)
-                        this.petMessage = "*Sniff* Iak!";
-                    else if (this.Hunger < 30)
-                        this.petMessage = "Gurrlll";
-                    else this.petMessage = ":D";
+                if(this.Health == 0){
+                    this.petMessage = "Aarrgggggg!";\
                 }
-                else if (currentEvent == Events.Eating)
+                else
                 {
-                    this.petMessage = "Yum Yum Yum";
+                    if (currentEvent == Events.Idle)
+                    {
+                        if (this.Stress < 50)
+                            this.petMessage = "Pufff";
+                        else if (this.Energy < 50)
+                            this.petMessage = "*Yawns*";
+                        else if (this.Hygiene < 50)
+                            this.petMessage = "*Sniff* Iak!";
+                        else if (this.Hunger < 30)
+                            this.petMessage = "Gurrlll";
+                        else this.petMessage = ":D";
+                    }
+                    else if (currentEvent == Events.Eating)
+                    {
+                        this.petMessage = "Yum Yum Yum";
+                    }
+                    else if (currentEvent == Events.Bathing)
+                    {
+                        this.petMessage = "";
+                    }
+                    else if (currentEvent == Events.Playing)
+                    {
+                        this.petMessage = "Yippee ki-yay";
+                    }
+                    else if (currentEvent == Events.Sleeping)
+                    {
+                        this.petMessage = "zZzZz...";
+                    }
                 }
-                else if (currentEvent == Events.Bathing)
-                {
-                    this.petMessage = "";
-                }
-                else if (currentEvent == Events.Playing)
-                {
-                    this.petMessage = "Yippee ki-yay";
-                }
-                else if (currentEvent == Events.Sleeping)
-                {
-                    this.petMessage = "zZzZz...";
-                }
-
             }
         }
         // CLASS PET END
@@ -311,6 +316,7 @@ namespace SanalBebek
             int AnimationIndex = 0;
             do
             {
+                if(isDead) break;
                 AnimationIndex++;
                 if (AnimationIndex == 4) AnimationIndex = 0;
                 Console.SetCursorPosition(0, 0);
