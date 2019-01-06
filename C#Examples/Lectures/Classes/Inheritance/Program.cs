@@ -15,12 +15,11 @@ namespace Vektorel.KalitimTekrar.App
                 Console.Clear();
                 Console.WriteLine("1-Truck\n2-Car\n3-Moto\n4-Exit>>");
                 char c = Console.ReadKey(true).KeyChar;
-                Vehicle V = new Vehicle();
 
                 switch (c)
                 {
                     case '1':
-                        Truck T = (Truck)Controller.AddValues(V);
+                        Truck T = Controller.AddValues<Truck>();
 
                         Console.Write("Wheels: ");
                         T.Wheels = Convert.ToInt32(Console.ReadLine());
