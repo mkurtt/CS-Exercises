@@ -9,16 +9,17 @@ namespace Vektorel.KalitimTekrar.App
 {
     public sealed class Controller
     {
-        public static Vehicle AddValues(Vehicle V)
+        public static T AddValues<T>() where T : Vehicle, new()
         {
+            T t = new T();
             Console.Write("Color: ");
-            V.Color = Console.ReadLine();
+            t.Color = Console.ReadLine();
             Console.Write("Marka: ");
-            V.Marka = Console.ReadLine();
+            t.Marka = Console.ReadLine();
             Console.Write("Model: ");
-            V.Model = Console.ReadLine();
-
-            return V;
+            t.Model = Console.ReadLine();
+            
+            return t as T;
         }
 
         public static void AddVehicle(Vehicle V)
