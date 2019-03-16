@@ -1,0 +1,29 @@
+public static void GenerateGridViewTable<T>(Form f, List<T> data)
+        {
+
+            //ArtistBO tbo = new ArtistBO();
+            //List<Artist> TrackList = tbo.GetList();
+            //FormHelper.GenerateGridViewTable<Artist>(this, TrackList);
+
+            DataGridView dgv = new DataGridView();
+            var type = typeof(T);
+            dgv.DataSource = data;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dgv.AutoResizeColumns();
+            dgv.AutoResizeRows();
+
+            f.Controls.Add(dgv);
+
+            int totalWidth = 0;
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                totalWidth += dgv.Columns[i].Width;
+            }
+
+            dgv.Width = totalWidth + 60 ; // Select area ?
+            //dgv.Height = 485; // 20 row ?
+
+            dgv.Height = 21 * dgv.Rows[0].Height; // -1 title bar
+
+            f.ClientSize = dgv.Size;
+        }
